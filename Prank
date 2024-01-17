@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percy Jackson New Cast Reveal</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e6e6e6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        #container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        h1, h2, p {
+            margin: 10px 0;
+            color: #333333;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Subtle background animation */
+        #container::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #4caf50, #2196f3);
+            opacity: 0.2;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            animation: moveBackground 10s infinite linear;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+</head>
+<body>
+    <div id="container">
+        <h1>Percy Jackson New Cast Reveal</h1>
+
+        <div id="step1">
+            <h2>Welcome!</h2>
+            <p>We're excited to share exclusive information with you.</p>
+            <p>What is Percy's favorite color?</p>
+            <form id="mcqForm">
+                <input type="radio" name="color" value="red"> Red<br>
+                <input type="radio" name="color" value="green"> Green<br>
+                <input type="radio" name="color" value="blue" onclick="checkAnswer()"> Blue<br>
+                <input type="radio" name="color" value="yellow"> Yellow<br>
+            </form>
+        </div>
+
+        <div id="congrats" class="hidden">
+            <h2>Congratulations!</h2>
+            <p>Your prize will arrive shortly.</p>
+        </div>
+
+        <script>
+            function checkAnswer() {
+                // Get the selected answer
+                var selectedAnswer = document.querySelector('input[name="color"]:checked');
+
+                // Check if the selected answer is "blue"
+                if (selectedAnswer && selectedAnswer.value === 'blue') {
+                    // Hide the question and show the congratulatory message
+                    document.getElementById('step1').style.display = 'none';
+                    document.getElementById('congrats').style.display = 'block';
+
+                    // Start a countdown timer
+                    var countdown = 3;
+                    var countdownInterval = setInterval(function() {
+                        countdown--;
+
+                        // Update the countdown message
+                        document.getElementById('congrats').innerHTML = `<h2>Congratulations!</h2><p>Your prize will arrive shortly. Redirecting in ${countdown} seconds...</p>`;
+
+                        // Check if the countdown has reached 0
+                        if (countdown <= 0) {
+                            // Redirect to the provided YouTube URL for correct answers
+                            window.location.href = 'https://www.youtube.com/watch?v=S3NRY-gnl2g';
+                            clearInterval(countdownInterval); // Stop the countdown
+                        }
+                    }, 1000);
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
